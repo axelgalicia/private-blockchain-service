@@ -4,7 +4,7 @@ Simple **RESTFul** API to retrieve and create Blocks from a private Blockchain.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites
 
@@ -41,14 +41,16 @@ The service will run on port 8000 by default
 
 |  Parameter | Type   | Description 
 |---|---|---|
-| index  |  Path Parameter | Indicates the index of the block that will be retrieved if it exist.
+| index  |  Path Parameter | Indicates the index of the block that will be retrieved if it exist.|
 
 **Response Codes**
-|  Code | Description
+
+
+| Code | Description 
 |---|---|
-| 200  |  The block was found and it is retrieved.
-| 404 | The resource it is not found or the block does not exist.
-| 500 | A server error.
+| 200 | The block was found and it is retrieved. |
+| 404 | The resource it is not found or the block does not exist. |
+| 500 | A server error. |
 
 If the block is found it will be retrieved. e.g.
 
@@ -76,9 +78,11 @@ $ curl -X GET localhost:8000/api/block/0
 | body  |  Payload Parameter | Indicates the data that the new block will contain
 
 **Response Codes**
-|  Code | Description
+
+
+| Code | Description
 |---|---|
-| 200  |  The block was created and returned.
+| 200  | The block was created and returned.
 | 400 | A bas request has been made to create a new block.
 | 500 | A server error
 
@@ -116,7 +120,7 @@ The blocklchain is being saved in a folder called **privatechain** which will be
 
 | Version | Status
 |---|---|
-|0.0.1| Stable
+|0.0.2| Stable
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/axelgalicia/private-blockchain-service/tags). 
 
