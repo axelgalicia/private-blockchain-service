@@ -1,31 +1,12 @@
-/**
- * Private Blockchain without concensus.
- *
- * @version 1.0.0
- * @author [Axel Galicia](https://github.com/axelgalicia)
- */
-
 /* ===== SHA256 with Crypto-js ===============================
 |  Learn more: Crypto-js: https://github.com/brix/crypto-js  |
 |  =========================================================*/
 
 const SHA256 = require('crypto-js/sha256');
-const storage = new (require('./levelSandbox')).Storage('./privatechain');
+const storage = new (require('../db/levelSandbox')).Storage('./privatechain');
+const Block = require('../entities/Block');
 const colors = require('colors');
 
-/* ===== Block Class ==============================
-|  Class with a constructor for block 			   |
-|  ===============================================*/
-
-class Block {
-  constructor(data) {
-    this.hash = '',
-      this.height = 0,
-      this.body = data,
-      this.time = 0,
-      this.previousBlockHash = ''
-  }
-}
 
 /* ===== Blockchain Class ==========================
 |  Class with a constructor for new blockchain 		|
@@ -172,59 +153,4 @@ class Blockchain {
 
 }
 
-
-
-
-// Testing Blockchain scenarios
-function runTest() {
-  Blockchain.initBlockchain().then(async (bc) => {
-
-    // Current Height
-    let currentBlockHeigh = await bc.getBlockHeight();
-
-
-    console.log('--------------------------------------')
-    console.log(`Current height: ${currentBlockHeigh}`.bgMagenta);
-    console.log('--------------------------------------')
-    // Adding 4 blocks
-    const block1 = await bc.addBlock(new Block(`Block #${++currentBlockHeigh}`));
-    const block2 = await bc.addBlock(new Block(`Block #${++currentBlockHeigh}`));
-    const block3 = await bc.addBlock(new Block(`Block #${++currentBlockHeigh}`));
-    const block4 = await bc.addBlock(new Block(`Block #${++currentBlockHeigh}`));
-    const blocks = [block1, block2, block3, block4];
-    console.log(`4 Blocks added:`.bgMagenta);
-    console.log(blocks)
-    console.log('--------------------------------------')
-
-
-    console.log('-----------------VALIDATING---------------'.bgMagenta)
-    // Validate chain before errors
-    let chainErrors = await bc.validateChain();
-    chainErrors = chainErrors.filter(p => p !== true);
-    console.log(`Errors found in chain: ${chainErrors.length}`.bgCyan);
-    console.log(chainErrors);
-
-
-    // Tampering data in the chain
-    let block3Copy = Blockchain.getBlockFromString(await bc.getBlock(4));
-    let block1Copy = Blockchain.getBlockFromString(await bc.getBlock(2));
-    block3Copy = block1Copy;
-    await storage.addLevelDBData(3, Blockchain.getBlockAsString(block3Copy));
-
-    console.log('-----------------AFTER CORRUPTING Block 3---------------'.bgMagenta)
-    console.log('-----------------VALIDATING---------------'.bgMagenta)
-    // Validate chain after error introduced
-    chainErrors = await bc.validateChain();
-    chainErrors = chainErrors.filter(p => p !== true);
-    console.log('------------------------------------------------------');
-    console.log(`Errors found in chain: ${chainErrors.length}`.bgCyan);
-    console.log(chainErrors);
-
-
-  }).catch(e => {
-    console.log(e);
-  });
-
-}
-
-runTest();
+module.exports = Blockchain;

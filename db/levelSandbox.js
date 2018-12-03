@@ -13,7 +13,7 @@ class Storage {
   addLevelDBData(key, value) {
     return new Promise((resolve, reject) => {
       this.db.put(key, value, function (err) {
-        if (err) { 
+        if (err) {
           console.log('Block ' + key + ' submission failed', err);
           reject(err);
         }
@@ -27,16 +27,16 @@ class Storage {
     return new Promise((resolve, reject) => {
       this.db.get(key, function (err, value) {
         if (err) {
-             console.log('Not found!', err);
-             reject();
-           };
+          // console.log('Not found!', err);
+          reject(-1);
+        };
         resolve(value);
       })
     });
   }
 
   // Add data to levelDB with value
- addDataToLevelDB(value) {
+  addDataToLevelDB(value) {
     let i = -1;
     return new Promise((resolve, reject) => {
       this.db.createReadStream().on('data', function (data) {
@@ -53,22 +53,22 @@ class Storage {
 
   }
 
-    // Get count of elements from db
-    length() {
-      let i = -1;
-      return new Promise((resolve, reject) => {
-        this.db.createReadStream().on('data', function (data) {
-          i++;
-        }).on('error', function (err) {
-          console.log('Unable to read data stream!', err);
-          reject(err);
-        }).on('close', function () {
-          resolve(i);
-        });
-  
+  // Get count of elements from db
+  length() {
+    let i = -1;
+    return new Promise((resolve, reject) => {
+      this.db.createReadStream().on('data', function (data) {
+        i++;
+      }).on('error', function (err) {
+        console.log('Unable to read data stream!', err);
+        reject(err);
+      }).on('close', function () {
+        resolve(i);
       });
-  
-    }
+
+    });
+
+  }
 
 
   // Prints all data in the db

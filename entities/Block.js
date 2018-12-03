@@ -7,8 +7,9 @@ class Block {
         this.hash = '';
         this.height = 0;
         this.body = data;
-        this.time = new Date().getTime().toString().slice(0, -3);
+        this.time = 0;
+        this.previousBlockHash = '';
     }
 }
 
-module.exports.Block = Block;
+module.exports = Block;
