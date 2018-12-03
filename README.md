@@ -2,6 +2,8 @@
 
 Simple **RESTFul** API to retrieve and create Blocks from a private Blockchain.
 
+This project was created using **Express JS** framework to facilitate the creation of the REST API.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine.
@@ -120,7 +122,7 @@ The blocklchain is being saved in a folder called **privatechain** which will be
 
 | Version | Status
 |---|---|
-|0.0.4| Stable
+|0.0.5| Stable
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/axelgalicia/private-blockchain-service/tags). 
 

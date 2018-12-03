@@ -27,7 +27,7 @@ class BlockController {
      * GET Endpoint to retrieve a block by index, url: "/api/block/:index"
      */
     getBlockByIndex() {
-        this.app.get("/api/block/:index", async (req, res) => {
+        this.app.get("/block/:index", async (req, res) => {
             const { index } = req.params;
             const block = await this.blockService.getBlockByIndex(index).catch((e) => {
                 let error = '';
@@ -50,7 +50,7 @@ class BlockController {
      * POST Endpoint to add a new Block, url: "/api/block"
      */
     postNewBlock() {
-        this.app.post("/api/block", async (req, res) => {
+        this.app.post("/block", async (req, res) => {
             const { body } = req.body;
             if (!body) {
                 const error = new ResponseError('The body property is required to create a new block!', ErrorType.PAYLOAD);
