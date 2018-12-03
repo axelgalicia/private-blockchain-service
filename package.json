@@ -1,6 +1,6 @@
 {
   "name": "private-blockchain-service",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A webservice for a private blockchain",
   "main": "index.js",
   "scripts": {
