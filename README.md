@@ -120,7 +120,7 @@ The blocklchain is being saved in a folder called **privatechain** which will be
 
 | Version | Status
 |---|---|
-|0.0.2| Stable
+|0.0.4| Stable
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/axelgalicia/private-blockchain-service/tags). 
 
